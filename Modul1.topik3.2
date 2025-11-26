@@ -1,0 +1,14 @@
+# Meminta pengguna memasukkan sebuah bilangan bulat
+bilangan_str = input("Masukkan sebuah bilangan bulat: ")
+
+# Mengubah input menjadi integer
+try:
+    bilangan = int(bilangan_str)
+except ValueError:
+    print("Input tidak valid. Harap masukkan bilangan bulat.")
+else:
+    # Menentukan apakah bilangan ganjil atau genap menggunakan operator modulus
+    if bilangan % 2 == 0:
+        print(f"Bilangan {bilangan} adalah Genap.")
+    else:
+        print(f"Bilangan {bilangan} adalah Ganjil.")
