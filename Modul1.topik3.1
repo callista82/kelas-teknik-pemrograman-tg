@@ -1,0 +1,14 @@
+# Meminta input suhu dalam Celcius dari pengguna
+celcius_str = input("Masukkan suhu dalam Celcius: ")
+
+# Mengubah input menjadi float
+try:
+    celcius = float(celcius_str)
+except ValueError:
+    print("Input tidak valid. Harap masukkan angka.")
+else:
+    # Menghitung suhu dalam Fahrenheit
+    fahrenheit = (celcius * 9/5) + 32
+
+    # Menampilkan hasil
+    print(f"Suhu {celcius}°C setara dengan {fahrenheit}°F")
