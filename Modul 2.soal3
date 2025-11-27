@@ -1,0 +1,17 @@
+def analisis_magnetik(data):
+    all_magnetik_values = []
+    for survey in data:
+        magnetic_values = survey.get('magnetic_values', [])
+        all_magnetik_values.extend(magnetic_values)
+
+    # Use a set to find unique values
+    unique_magnetik_values = set(all_magnetik_values)
+
+    # Convert back to a list and sort it
+    sorted_unique_magnetik_values = sorted(list(unique_magnetik_values))
+
+    return sorted_unique_magnetik_values
+
+# Example usage for analisis_magnetik
+magnetik_analysis = analisis_magnetik(sample_data)
+print("\nAnalisis Magnetik: Nilai Unik Terurut =", magnetik_analysis)
