@@ -1,0 +1,33 @@
+def qc_seismik(data, ambang_offset):
+    laporan = {}
+    for survey in data:
+        survey_id = survey['survey_id']
+        ok_traces = 0
+        bad_traces = 0
+        
+        # Initialize a list to hold traces with their QC flags
+        qc_traces = []
+
+        for trace in survey['traces']:
+            if trace['offset'] > ambang_offset:
+                trace['QC_flag'] = "BAD"
+                bad_traces += 1
+            else:
+                trace['QC_flag'] = "OK"
+                ok_traces += 1
+            qc_traces.append(trace)
+
+        laporan[survey_id] = {
+            "total_ok_traces": ok_traces,
+            "total_bad_traces": bad_traces,
+            "all_traces_with_qc_flag": qc_traces # Optional: include detailed trace info
+        }
+    return laporan
+
+# Example usage for qc_seismik
+ambang_offset = 200 # Set your desired offset threshold
+qc_report = qc_seismik(sample_data, ambang_offset)
+print("QC Seismik Laporan:")
+for survey_id, report in qc_report.items():
+    print(f"Survey {survey_id}: OK Traces = {report['total_ok_traces']}, BAD Traces = {report['total_bad_traces']}")
+    # print(f"  Detailed Traces: {report['all_traces_with_qc_flag']}") # Uncomment for detailed output
