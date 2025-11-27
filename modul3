@@ -1,0 +1,27 @@
+import random
+
+class Sensor:
+    def __init__(self, id, lokasi):
+        self.id = id
+        self.lokasi = lokasi
+        self.status = 'nonaktif'
+        self.data_terekam = []
+        print(f"Sensor {self.id} di {self.lokasi} telah dibuat dengan status '{self.status}'.")
+
+    def aktifkan_sensor(self):
+        self.status = 'aktif'
+        print(f"Sensor {self.id} diaktifkan.")
+
+    def nonaktifkan_sensor(self):
+        self.status = 'nonaktif'
+        print(f"Sensor {self.id} dinonaktifkan.")
+
+    def rekam_data(self):
+        if self.status == 'aktif':
+            pembacaan_acak = random.uniform(0.0, 100.0) # Generate a random float between 0.0 and 100.0
+            self.data_terekam.append(pembacaan_acak)
+            print(f"Sensor {self.id}: Data {pembacaan_acak:.2f} direkam.")
+        else:
+            print(f"Sensor {self.id} tidak aktif. Tidak dapat merekam data.")
+
+print("Kelas Sensor telah didefinisikan.")
