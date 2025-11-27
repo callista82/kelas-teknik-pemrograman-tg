@@ -1,0 +1,36 @@
+def statistik_gravitasi(data):
+    gravitasi_stats = {}
+    all_grav_values = []
+
+    for survey in data:
+        survey_id = survey['survey_id']
+        gravity_values = survey.get('gravity_values', [])
+        
+        if gravity_values:
+            avg_grav = sum(gravity_values) / len(gravity_values)
+            gravitasi_stats[survey_id] = {"rata_rata_gravitasi": avg_grav}
+            all_grav_values.extend(gravity_values)
+        else:
+            gravitasi_stats[survey_id] = {"rata_rata_gravitasi": None}
+
+    if all_grav_values:
+        gravitasi_stats["seluruh_survey"] = {
+            "gravitasi_terendah": min(all_grav_values),
+            "gravitasi_tertinggi": max(all_grav_values)
+        }
+    else:
+        gravitasi_stats["seluruh_survey"] = {
+            "gravitasi_terendah": None,
+            "gravitasi_tertinggi": None
+        }
+
+    return gravitasi_stats
+
+# Example usage for statistik_gravitasi
+grav_report = statistik_gravitasi(sample_data)
+print("\nStatistik Gravitasi:")
+for key, value in grav_report.items():
+    if key == "seluruh_survey":
+        print(f"Seluruh Survey: Gravitasi Terendah = {value['gravitasi_terendah']}, Gravitasi Tertinggi = {value['gravitasi_tertinggi']}")
+    else:
+        print(f"Survey {key}: Rata-rata Gravitasi = {value['rata_rata_gravitasi']:.4f}")
