@@ -1,0 +1,13 @@
+import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("geofisika.db")
+
+df_bandar_lampung = pd.read_sql_query(
+    "SELECT * FROM survey WHERE lokasi = 'Bandar Lampung'",
+    conn
+)
+
+print(df_bandar_lampung)
+
+conn.close()
