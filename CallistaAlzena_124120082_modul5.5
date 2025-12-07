@@ -1,0 +1,19 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Buat matriks 20x50 menggunakan np.zeros
+data_model = np.zeros((20, 50))
+
+# 2. Ubah nilai di tengah matriks menjadi 1
+# Misal: baris 8 sampai 11 (inklusif), kolom 20 sampai 29 (inklusif)
+data_model[8:12, 20:30] = 1
+
+# 3. Tampilkan matriks tersebut menggunakan plt.imshow()
+plt.figure(figsize=(12, 6))
+plt.imshow(data_model, cmap='gray', origin='lower', aspect='auto') # origin='lower' untuk y=0 di bawah
+plt.colorbar(label='Nilai (0 atau 1)')
+plt.title('Model Penampang 2D Sederhana')
+plt.xlabel('Kolom')
+plt.ylabel('Baris')
+plt.grid(False)
+plt.show()
