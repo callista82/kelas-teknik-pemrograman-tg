@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# Create the figure and axes
+fig, ax = plt.subplots(figsize=(10, 5))
+x = np.linspace(0, 2 * np.pi, 200) # More points for a smoother wave
+line, = ax.plot(x, np.sin(x), lw=2)
+
+# Set axis limits
+ax.set_xlim(0, 2 * np.pi)
+ax.set_ylim(-1.5, 1.5)
+ax.set_title('Animasi Gelombang Teredam (Damped Wave)')
+ax.set_xlabel('Posisi (x)')
+ax.set_ylabel('Amplitudo')
+ax.grid(True)
+
+# Update function with damping
+def update_damped_wave(frame):
+    # Amplitudo mengecil seiring waktu (damping factor)
+    damping_factor = 1 - (frame / 100) # Misalnya, meredam penuh dalam 100 frame
+    if damping_factor < 0: # Pastikan tidak ada amplitudo negatif yang membalik gelombang
+        damping_factor = 0
+
+    # Hitung data y baru dengan damping dan pergerakan
+    y_data = damping_factor * np.sin(x - 0.2 * frame)
+    line.set_ydata(y_data)
+    return line,
+
+# Create the animation
+# Mengatur frames hingga 100 agar damping_factor mencapai 0
+ani = FuncAnimation(fig, update_damped_wave, frames=range(101), blit=True, interval=50)
+
+# Untuk menampilkan animasi di notebook Jupyter/Colab, Anda mungkin perlu menyimpan sebagai GIF/video
+# atau pastikan backend Matplotlib sudah diatur dengan benar.
+# Jika Anda menjalankan ini secara lokal, plt.show() akan membuka jendela animasi.
+
+plt.show()
