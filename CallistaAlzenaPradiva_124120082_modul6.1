@@ -1,0 +1,30 @@
+import sqlite3
+
+# Nama database
+db_file = 'geofisika.db'
+
+# Terhubung ke database (ini akan membuat file database jika belum ada)
+conn = sqlite3.connect(db_file)
+c = conn.cursor()
+
+# Query SQL untuk membuat tabel 'survey'
+create_table_query = """
+CREATE TABLE IF NOT EXISTS survey (
+    id_survey INTEGER PRIMARY KEY NOT NULL,
+    nama_survey TEXT NOT NULL,
+    lokasi TEXT,
+    tanggal TEXT,
+    metode TEXT
+);
+"""
+
+# Eksekusi query
+try:
+    c.execute(create_table_query)
+    conn.commit()
+    print(f"Tabel 'survey' berhasil dibuat di {db_file}")
+except sqlite3.Error as e:
+    print(f"Terjadi kesalahan saat membuat tabel: {e}")
+finally:
+    # Tutup koneksi
+    conn.close()
