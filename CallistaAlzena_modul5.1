@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+
+# Data sinyal seismik sederhana
+waktu = [0, 1, 2, 3, 4, 5, 6, 7]
+amplitudo = [0, 5, 8, 3, -2, -4, -1, 0]
+
+# Buat line chart
+plt.figure(figsize=(10, 6))
+plt.plot(waktu, amplitudo, marker='o', linestyle='-')
+
+# Beri label sumbu
+plt.xlabel('Waktu (ms)')
+plt.ylabel('Amplitudo')
+
+# Beri judul
+plt.title('Trace Seismik')
+
+# Tampilkan grid
+plt.grid(True)
+
+# Tampilkan plot
+plt.show()
