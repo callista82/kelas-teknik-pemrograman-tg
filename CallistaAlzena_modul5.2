@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+
+# Data frekuensi litologi
+litologi = ['Pasir', 'Lempung', 'Batugamping', 'Gambut']
+jumlah = [35, 50, 20, 10]
+
+# Buat bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(litologi, jumlah, color=['skyblue', 'lightcoral', 'lightgreen', 'gold'])
+
+# Beri label sumbu
+plt.xlabel('Tipe Litologi')
+plt.ylabel('Jumlah Frekuensi')
+
+# Beri judul
+plt.title('Frekuensi Tipe Litologi di Area Survei')
+
+# Tampilkan grid
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Tampilkan plot
+plt.show()
