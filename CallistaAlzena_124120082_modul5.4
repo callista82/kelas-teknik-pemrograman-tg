@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import griddata
+
+# Data survei geomagnetik sederhana
+data = {
+    'X': [0, 0, 50, 50, 100, 100],
+    'Y': [0, 50, 0, 50, 0, 50],
+    'Total_Field': [43210, 43280, 43100, 43420, 43050, 43500]
+}
+df_mag = pd.DataFrame(data)
+
+# Menyiapkan data untuk interpolasi
+x = df_mag['X'].values
+y = df_mag['Y'].values
+z = df_mag['Total_Field'].values
+
+# Membuat grid untuk interpolasi
+# Menentukan rentang X dan Y
+xi = np.linspace(x.min(), x.max(), 100) # 100 titik di sumbu X
+yi = np.linspace(y.min(), y.max(), 100) # 100 titik di sumbu Y
+
+# Menginterpolasi data ke grid
+# Menggunakan metode 'linear' untuk interpolasi
+z_interp = griddata((x, y), z, (xi[None,:], yi[:,None]), method='linear')
+
+# Membuat peta kontur anomali magnetik
+plt.figure(figsize=(10, 8))
+contour = plt.contourf(xi, yi, z_interp, levels=20, cmap='viridis')
+plt.colorbar(contour, label='Total Field (nT)')
+
+# Menambahkan titik data asli ke plot
+plt.scatter(x, y, c='red', s=50, edgecolors='black', label='Titik Survei')
+
+# Beri label sumbu dan judul
+plt.xlabel('X (m)')
+plt.ylabel('Y (m)')
+plt.title('Peta Kontur Anomali Magnetik')
+plt.grid(True)
+plt.legend()
+plt.show()
